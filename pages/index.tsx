@@ -8,6 +8,7 @@ const Home: NextPage = () => {
   const [answer, setAnswer] = useState(0);
   const [question, setQuestion] = useState("");
   const [numberLimit, setNumberLimit] = useState(10);
+  const [learned, setLearned] = useState([""]);
 
   // Functions
   // Generate operator
@@ -77,6 +78,12 @@ const Home: NextPage = () => {
 
     // Clear input
     e.target.value = "";
+
+    // Add question and answer together
+    const questionAndAnswer = `${question} = ${answer}`;
+
+    // Add to learned
+    setLearned([...learned, questionAndAnswer]);
   };
 
   // Handle change
@@ -98,17 +105,25 @@ const Home: NextPage = () => {
       <header className="h-16 fixed bg-gray-100 w-full flex items-center px-16">
         <h1>Math Trainer</h1>
       </header>
-      <main className="min-h-screen pt-16 w-full flex items-center justify-center text-center flex-col">
-        <h1 className="text-6xl mb-8 font-bold">{question}</h1>
-        <form className="">
-          <input
-            className="text-6xl outline-none appearance-none w-32 font-bold text-blue-400 opacity-1 placeholder:text-blue-300 cursor-pointer caret-transparent"
-            type="number"
-            onChange={handleChange}
-            name="answer"
-            placeholder="0"
-          />
-        </form>
+      <main className="min-h-screen p-16 pt-32 w-full">
+        <section className="shadow-xl rounded-2xl p-16 text-center flex justify-center flex-col items-center md:w-1/2 mb-16">
+          <h1 className="text-6xl mb-8 font-bold">{question}</h1>
+          <form className="">
+            <input
+              className="text-6xl outline-none appearance-none w-32 font-bold text-blue-400 opacity-1 placeholder:text-blue-300 cursor-pointer caret-transparent"
+              type="number"
+              onChange={handleChange}
+              name="answer"
+              placeholder="0"
+            />
+          </form>
+        </section>
+        <section>
+          <h2 className="text-xl mb-4">Learned questions</h2>
+          {learned.map((question) => {
+            return <p>{question}</p>;
+          })}
+        </section>
       </main>
       <footer className="h-16 bg-gray-100 w-full px-16 flex items-center">
         Footer
