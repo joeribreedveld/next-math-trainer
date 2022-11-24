@@ -120,9 +120,11 @@ const Home: NextPage = () => {
         </section>
         <section>
           <h2 className="text-xl mb-4">Learned questions</h2>
-          {learned.map((question) => {
-            return <p>{question}</p>;
-          })}
+          <ul>
+            {learned.map((question) => {
+              return <li key={question}>{question}</li>;
+            })}
+          </ul>
         </section>
       </main>
       <footer className="h-16 bg-gray-100 w-full px-16 flex items-center">
