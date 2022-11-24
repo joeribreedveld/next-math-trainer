@@ -106,11 +106,11 @@ const Home: NextPage = () => {
         <h1>Math Trainer</h1>
       </header>
       <main className="min-h-screen p-16 pt-32 w-full">
-        <section className="shadow-xl rounded-2xl p-16 text-center flex justify-center flex-col items-center md:w-1/2 mb-16">
-          <h1 className="text-6xl mb-8 font-bold">{question}</h1>
+        <section className="shadow-xl rounded-2xl p-16 md:text-center flex md:justify-center flex-col md:items-center md:w-1/2 mb-16">
+          <h1 className="text-4xl md:text-6xl mb-8 font-bold">{question}</h1>
           <form className="">
             <input
-              className="text-6xl outline-none appearance-none w-32 font-bold text-blue-400 opacity-1 placeholder:text-blue-300 cursor-pointer caret-transparent"
+              className="text-4xl md:text-6xl outline-none appearance-none w-32 font-bold text-blue-400 opacity-1 placeholder:text-blue-300 cursor-pointer caret-transparent"
               type="number"
               onChange={handleChange}
               name="answer"
