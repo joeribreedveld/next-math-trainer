@@ -11,9 +11,9 @@ const Home: NextPage = () => {
 
   // Functions
   // Generate operator
-  const generateOperator = () => {
+  const generateOperator = async () => {
     // Generate random number
-    const num = Math.floor(Math.random() * 4);
+    const num = await Math.floor(Math.random() * 4);
     // Choose operator
     switch (num) {
       case 0:
@@ -27,54 +27,67 @@ const Home: NextPage = () => {
     }
   };
 
+  // Validate answer
+  const generateAnswer = ({ operator, num1, num2 }: any) => {
+    switch (operator) {
+      case "+":
+        return num1 + num2;
+        break;
+      case "-":
+        return num1 - num2;
+        break;
+      case "*":
+        return num1 * num2;
+        break;
+      case "/":
+        return num1 / num2;
+        break;
+    }
+  };
+
   // Generate question
-  const generateQuestion = () => {
+  const generateQuestion = async () => {
     // Generate random numbers
-    const num1 = Math.floor(Math.random() * numberLimit);
-    const num2 = Math.floor(Math.random() * numberLimit);
+    const num1 = await Math.floor(Math.random() * numberLimit);
+    const num2 = await Math.floor(Math.random() * numberLimit);
 
     // Generate operator
-    const operator = generateOperator();
+    const operator = await generateOperator();
 
     // Generate question
     const question = `${num1} ${operator} ${num2}`;
 
-    // Calculate answer with operator case
-    switch (operator) {
-      case "+":
-        setAnswer(num1 + num2);
-        break;
-      case "-":
-        setAnswer(num1 - num2);
-        break;
-      case "*":
-        setAnswer(num1 * num2);
-        break;
-      case "/":
-        setAnswer(num1 / num2);
-        break;
+    // Generate answer
+    const answer = await generateAnswer({ operator, num1, num2 });
+
+    // Validate answer
+    if (answer % 1 != 0) {
+      // Reset question
+      generateQuestion();
     }
 
-    // Set question
+    // Set state
     setQuestion(question);
+    setAnswer(answer);
+  };
+
+  // Handle correct answer
+  const handleCorrect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Log correct
+    console.log("Correct!");
+
+    // Generate new question
+    generateQuestion();
+
+    // Clear input
+    e.target.value = "";
   };
 
   // Handle change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Get value
-    const value = e.target.value;
-
-    // Check if value is answer
-    if (value == answer.toString()) {
-      // Handle correct answer
-      // Log correct
-      console.log("Correct!");
-
-      // Generate new question
-      generateQuestion();
-
-      // Clear input
-      e.target.value = "";
+    // Check if answer is correct
+    if (parseInt(e.target.value) === answer) {
+      handleCorrect(e);
     }
   };
 
