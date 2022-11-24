@@ -1,11 +1,12 @@
 // Imports
 import type { NextPage } from "next";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Functions
 const Home: NextPage = () => {
   // State
   const [answer, setAnswer] = useState(0);
+  const [question, setQuestion] = useState("");
 
   // Functions
   // Generate operator
@@ -53,14 +54,19 @@ const Home: NextPage = () => {
         break;
     }
 
-    // Return question
-    return question;
+    // Set question
+    setQuestion(question);
   };
+
+  // useEffect
+  useEffect(() => {
+    // Generate question
+    generateQuestion();
+  }, []);
 
   return (
     <>
-      <h1>Hello, world!</h1>
-      <button onClick={() => generateQuestion()}>Generate question</button>
+      <h1>{question}</h1>
     </>
   );
 };
