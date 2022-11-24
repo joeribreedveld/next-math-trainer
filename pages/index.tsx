@@ -25,6 +25,20 @@ const Home: NextPage = () => {
     }
   };
 
+  // Generate question
+  const generateQuestion = () => {
+    // Generate random numbers
+    const num1 = Math.floor(Math.random() * 10);
+    const num2 = Math.floor(Math.random() * 10);
+
+    // Generate operator
+    const operator = generateOperator();
+
+    // Generate question
+    const question = `${num1} ${operator} ${num2}`;
+    console.log(question);
+  };
+
   return (
     <>
       <h1>Hello, world!</h1>
