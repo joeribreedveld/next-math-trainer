@@ -36,12 +36,31 @@ const Home: NextPage = () => {
 
     // Generate question
     const question = `${num1} ${operator} ${num2}`;
-    console.log(question);
+
+    // Calculate answer with operator case
+    switch (operator) {
+      case "+":
+        setAnswer(num1 + num2);
+        break;
+      case "-":
+        setAnswer(num1 - num2);
+        break;
+      case "*":
+        setAnswer(num1 * num2);
+        break;
+      case "/":
+        setAnswer(num1 / num2);
+        break;
+    }
+
+    // Return question
+    return question;
   };
 
   return (
     <>
       <h1>Hello, world!</h1>
+      <button onClick={() => generateQuestion()}>Generate question</button>
     </>
   );
 };
