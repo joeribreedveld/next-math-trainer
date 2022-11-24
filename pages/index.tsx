@@ -32,16 +32,12 @@ const Home: NextPage = () => {
     switch (operator) {
       case "+":
         return num1 + num2;
-        break;
       case "-":
         return num1 - num2;
-        break;
       case "*":
         return num1 * num2;
-        break;
       case "/":
         return num1 / num2;
-        break;
     }
   };
 
@@ -99,10 +95,24 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <h1>{question}</h1>
-      <form>
-        <input type="number" onChange={handleChange} name="answer" />
-      </form>
+      <header className="h-16 fixed bg-gray-100 w-full flex items-center px-16">
+        <h1>Math Trainer</h1>
+      </header>
+      <main className="min-h-screen pt-16 w-full flex items-center justify-center text-center flex-col">
+        <h1 className="text-6xl mb-8 font-bold">{question}</h1>
+        <form className="">
+          <input
+            className="text-6xl outline-none appearance-none w-32 font-bold text-blue-400 opacity-1 placeholder:text-blue-300 cursor-pointer caret-transparent"
+            type="number"
+            onChange={handleChange}
+            name="answer"
+            placeholder="0"
+          />
+        </form>
+      </main>
+      <footer className="h-16 bg-gray-100 w-full px-16 flex items-center">
+        Footer
+      </footer>
     </>
   );
 };
